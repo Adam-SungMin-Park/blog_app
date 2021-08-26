@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 //void main() {
 // runApp(MyApp());
@@ -34,8 +35,18 @@ class _MyAppState extends State<MyApp> {
     }*/
 
     var questions = [
-      'What is your favorite color?',
-      'what is your favorite animal?',
+      {
+        'questionText': 'What is your favorite color?',
+        'answers': ['Black', 'Red', 'Green', 'Blue'],
+      },
+      {
+        'questionText': 'what is your favorite animal?',
+        'answers': ['Snake', 'Rabbit', 'Cat', 'Dog'],
+      },
+      {
+        'questionText': 'what is your favorite something else?',
+        'answers': ['Hey ', 'Hi', 'Ho', 'He'],
+      },
     ];
 
     return MaterialApp(
@@ -46,11 +57,12 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(
-              questions[_questionIndex],
+              questions[_questionIndex]['questionsText'],
             ),
-            ElevatedButton(child: Text('Answer 1'), onPressed: _answerQuestion),
-            ElevatedButton(child: Text('Answer 2'), onPressed: _answerQuestion),
-            ElevatedButton(child: Text('Answer 3'), onPressed: _answerQuestion),
+            (questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(answer);
+            })
           ],
         ),
       ),
